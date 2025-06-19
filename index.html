@@ -49,6 +49,20 @@
       margin-bottom: 30px;
     }
 
+    .timer-box {
+      background: #ffebf0;
+      color: #c2185b;
+      padding: 20px;
+      margin: 30px auto;
+      text-align: center;
+      border-radius: 16px;
+      font-size: 1.8em;
+      font-weight: 600;
+      max-width: 600px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border: 2px solid #fff;
+    }
+
     .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -148,6 +162,10 @@
     <h1>Backlink Services</h1>
     <div class="quote">Ranking doesn’t grow on trees — it comes through our backlinks!</div>
 
+    <div class="timer-box">
+      ⏳ Hurry! Offer ends in <span id="countdown">17:00:00</span>
+    </div>
+
     <div class="grid">
       <div class="card">
         <div class="card-title">500 Backlinks Package</div>
@@ -202,13 +220,25 @@
       </a>
     </div>
 
-    <div class="sample-image-container" style="margin-top: 20px;">
-      <h3>📸 Sample Image</h3>
-      <img id="toggleImage" 
-           src="https://scontent.fbhv2-1.fna.fbcdn.net/v/t39.30808-6/506086186_122233120562233775_5939436002212112337_n.jpg?_nc_cat=100&amp;ccb=1-7&amp;_nc_sid=127cfc&amp;_nc_ohc=lFztY_hTIi8Q7kNvwEPp9Hj&amp;_nc_oc=Adnh8wqqnlY6Zku-Ohq5rXZ_WyiG9Mcfp-0wuAIdVYUUrAD6xC0t9YPNKMrT5VwfX5CeJ36BSbBu4yc5vAc1CcK0&amp;_nc_zt=23&amp;_nc_ht=scontent.fbhv2-1.fna&amp;_nc_gid=5ojKplu62kFZshtbXHQcbQ&amp;oh=00_AfNeXuyLp5hn2-h8z5rt7nTsSkegboAxVek21MA1BxuGaw&amp;oe=6858F65C"
-           alt="Backlink Service Sample Report Image"
-           onclick="toggleFullScreen(this)">
-    </div>
+    <!-- Sample Image Section -->
+<div class="sample-image-container" style="margin-top: 20px;">
+  <h3>📸 Sample Image</h3>
+  <img id="toggleImage" 
+       src="https://scontent.fbhv2-1.fna.fbcdn.net/v/t39.30808-6/506086186_122233120562233775_5939436002212112337_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_ohc=lFztY_hTIi8Q7kNvwEPp9Hj&_nc_oc=Adnh8wqqnlY6Zku-Ohq5rXZ_WyiG9Mcfp-0wuAIdVYUUrAD6xC0t9YPNKMrT5VwfX5CeJ36BSbBu4yc5vAc1CcK0&_nc_zt=23&_nc_ht=scontent.fbhv2-1.fna&_nc_gid=lFUYq0yJCA4rl0Xvt_Kuyw&oh=00_AfO4Sct4H9_hJ0zdluARCCGDzuSruiUIBikoqqZqJbRTQg&oe=68592E9C"
+       alt="Backlink Service Sample Report Image"
+       onclick="toggleFullScreen(this)"
+       style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); cursor: pointer;">
+</div>
+
+<script>
+  function toggleFullScreen(img) {
+    if (!document.fullscreenElement) {
+      img.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+</script>
   </div>
 
   <script>
@@ -219,6 +249,21 @@
         document.exitFullscreen();
       }
     }
+
+    // Countdown Timer Logic
+    const countdownElement = document.getElementById("countdown");
+    let countdownSeconds = 17 * 3600;
+    function updateCountdown() {
+      let hours = Math.floor(countdownSeconds / 3600);
+      let minutes = Math.floor((countdownSeconds % 3600) / 60);
+      let seconds = countdownSeconds % 60;
+      countdownElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      if (countdownSeconds > 0) {
+        countdownSeconds--;
+        setTimeout(updateCountdown, 1000);
+      }
+    }
+    updateCountdown();
   </script>
 </body>
 </html>
